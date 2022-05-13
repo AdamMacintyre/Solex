@@ -1,15 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+
+import Navbar from './components/navbar/Navbar';
+import Home from './pages/Home'
+import AboutUs from './pages/AboutUs'
+import Contact from './pages/Contact'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-        magic awaiting
-        </p>
-      </header>
+      <Router>
+
+        <Navbar />
+
+        <Routes>
+          <Route exact path='/' element={<Home />} />
+          <Route exact path='/aboutus' element={<AboutUs />} />
+          <Route exact path='/contact' element={<Contact />} />
+        </Routes>
+
+      </Router>
     </div>
   );
 }
