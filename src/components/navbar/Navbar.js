@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-
+import { motion, AnimatePresence } from "framer-motion"
 
 import { makeStyles, ThemeProvider, AppBar, Toolbar, List, ListItem, Typography, } from '@material-ui/core'
 
 import Logo from './Logo';
 import Toggler from './Toggler';
+import HiddenList from './HiddenList';
+import MainList from './MainList';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,15 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     toolbar: {
-        
-    },
-
-    list : {
-        display: "flex",
-    },
-
-    navlinks:{
-        whiteSpace: 'nowrap'
+    justifyContent: 'space-between',
     },
 
 
@@ -40,21 +34,43 @@ function Navbar() {
             (setShow(!show))
         }, 300)
     }
+
+
   return (
     <div>
     <ThemeProvider>
+    <AnimatePresence initial={false}>
+    {show && (
+         <motion.div className='motionMenu'
+         initial={{ opacity: 0.5 }}
+         animate={{ opacity: 1,  
+           x: ['-20px',   '0px'] 
+        
+        }}
+        exit={{ x: -500, opacity: 0, transition: { duration: 0.5 } }}
+         transition={{
+           ease: [0.03, 0.01, 0.01, .01],
+           
+           duration: 1,
+       }}
+       >
+
+        <HiddenList />
+        
+    </motion.div>
+    )}
+    </AnimatePresence>
     <AppBar position="fixed">
     <Toolbar variant="dense" className={classes.toolbar}>
 
    
     <Link to={'/'} ><Logo/></Link>
 
+    <MainList />
+  
 
-    <List  direction="row" className={classes.list}>
-    <ListItem> <Link to="/aboutus" ><Typography variant="h6" className={classes.navlinks} >about us</Typography></Link></ListItem>
-    <ListItem> <Link to="/contact" ><Typography variant="h6" className={classes.navlinks} >contact</Typography></Link></ListItem>
+    
 
-    </List>
 
     <Toggler 
       togglerHandler={togglerHandler}

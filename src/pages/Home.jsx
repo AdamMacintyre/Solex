@@ -2,7 +2,10 @@ import React from 'react'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div style={{paddingTop: '64px' }}>Home
+
+
+    </div>
   )
 }
 
