@@ -1,13 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-import {List, ListItem, Typography, makeStyles } from '@material-ui/core'
+import {List, ListItem, Typography, makeStyles, useTheme } from '@material-ui/core'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     mainlist : {
         display: "flex",
         marginLeft: 'auto',
         whiteSpace: 'nowrap',
+
+        [theme.breakpoints.between('xs', 'xs')]: {
+          display: 'none'
+       }
     },
   
 
@@ -15,7 +19,7 @@ const useStyles = makeStyles(() => ({
 
 const MainList = () => {
     const classes = useStyles();
-
+    const theme = useTheme();
   return (
     <List  direction="row" className={classes.mainlist}>
     <ListItem> <Link to="/products" ><Typography variant="h6" className={classes.navlinks} >products</Typography></Link></ListItem>

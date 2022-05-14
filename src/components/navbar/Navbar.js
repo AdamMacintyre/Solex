@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion"
 
-import { makeStyles, ThemeProvider, AppBar, Toolbar, List, ListItem, Typography, } from '@material-ui/core'
+import { makeStyles, ThemeProvider, AppBar, Toolbar, Box } from '@material-ui/core'
 
 import Logo from './Logo';
 import Toggler from './Toggler';
@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     toolbar: {
+    minHeight: '64px',
     justifyContent: 'space-between',
     },
 
@@ -32,30 +33,31 @@ function Navbar() {
     const togglerHandler = () => {
         setTimeout(()=>{ 
             (setShow(!show))
-        }, 300)
+        }, 250)
     }
 
 
   return (
-    <div>
+ 
     <ThemeProvider>
     <AnimatePresence initial={false}>
     {show && (
          <motion.div className='motionMenu'
          initial={{ opacity: 0.5 }}
-         animate={{ opacity: 1,  
-           x: ['-20px',   '0px'] 
-        
+         animate={{ 
+           opacity: 1,  
+           x: ['-20px',   '0px'],
+          
         }}
         exit={{ x: -500, opacity: 0, transition: { duration: 0.5 } }}
          transition={{
            ease: [0.03, 0.01, 0.01, .01],
            
-           duration: 1,
+           duration: 0.5,
        }}
        >
 
-        <HiddenList />
+      <HiddenList  />
         
     </motion.div>
     )}
@@ -65,13 +67,12 @@ function Navbar() {
 
    
     <Link to={'/'} ><Logo/></Link>
+      
 
-    <MainList />
-  
+    <MainList  />
+ 
 
     
-
-
     <Toggler 
       togglerHandler={togglerHandler}
       show={show ? "open" : "closed"} 
@@ -86,7 +87,7 @@ function Navbar() {
 
 
 
-    </div>
+    
   )
 }
 

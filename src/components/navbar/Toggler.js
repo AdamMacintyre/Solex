@@ -1,10 +1,10 @@
 import React from 'react'
 import { motion } from "framer-motion"
-import { makeStyles } from '@material-ui/core'
+import { makeStyles, useTheme } from '@material-ui/core'
 
 const Path = (props) => (
     < motion.path 
-        strokeWidth="3" 
+        strokeWidth="4" 
         fill="transparent" 
         strokeLinecap="round" 
         {...props} />
@@ -12,19 +12,27 @@ const Path = (props) => (
 const transition = { duration: 0.3 };
 
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
     toggler: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: "center",
         height: "35px",
         width: '35px',
+        background:'transparent',
+        border: '3px solid #fff',
+        borderRadius: '5px',
+
+        [theme.breakpoints.between('sm', 'xl')]: {
+            display: 'none'
+         }
     },
 
 }));
 
 function Toggler({togglerHandler, show}) {
     const classes = useStyles();
+    const theme = useTheme();
   return (
     <button className={classes.toggler}
     onClick={togglerHandler}
@@ -33,15 +41,15 @@ function Toggler({togglerHandler, show}) {
             <Path animate={show} 
             initial={false} 
             variants={{
-                 closed: { d: "M 2 2.5 L 20 2.5", stroke: "hsl(255, 100%, 37.6%)"},
-                 open: { d: "M 3 16.5 L 17 2.5", stroke: "hsl(255, 100%, 37.6%)" }
+                 closed: { d: "M 2 2.5 L 20 2.5", stroke: "hsl(255, 100%, 100%)"},
+                 open: { d: "M 3 16.5 L 17 2.5", stroke: "hsl(255, 100%, 100%)" }
             
             }} transition={transition}  
             />
 
             <Path 
             d="M 2 9.423 L 20 9.423"
-            stroke="hsl(255, 100%, 37.6%)"
+            stroke="hsl(255, 100%, 100%)"
             animate={show}
             initial={false}
             variants={{
@@ -54,8 +62,8 @@ function Toggler({togglerHandler, show}) {
             <Path animate={show} 
             initial={false} 
             variants={{
-                 closed: { d: "M 2 16.346 L 20 16.346", stroke: "hsl(268, 100%, 37.6%)"},
-                 open: { d: "M 3 2.5 L 17 16.346", stroke: "hsl(268, 100%, 37.6%)" }
+                 closed: { d: "M 2 16.346 L 20 16.346", stroke: "hsl(255, 100%, 100%)"},
+                 open: { d: "M 3 2.5 L 17 16.346", stroke: "hsl(255, 100%, 100%)" }
             
             }} transition={transition}  
             />
